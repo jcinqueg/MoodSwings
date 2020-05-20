@@ -57,3 +57,14 @@ export function song(name) {
 export function popularSongs() {
     //TODO
 }
+
+/**
+ * So this is meant to take a users spotify profile and find a key. The key is a song object that is what
+ * we should be looking for in the popular songs list. Basically the key is the perfect song we'd hope to find.
+ * I have no idea how the profile authentification or anything like that works, so feel free to go at the html
+ * or whatever to make this function actually work as intended. This is the big one.
+ * @param {??} profile 
+ */
+export function getKey(profile) {
+    //TODO
+}
