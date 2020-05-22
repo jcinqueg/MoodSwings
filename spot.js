@@ -50,7 +50,7 @@ window.onload = function() {
         $(".error")[0].style.display = "block"
         //console.log(success, localStorage.getItem('received_state'), localStorage.getItem('spotify_auth_state'))
     }
-    //Example function call with callback funtion that prints response to console
+    //Populates the top songs into a global variable
     querySpotifyTopSongs(20, createPopSongCallback)
 }
 
