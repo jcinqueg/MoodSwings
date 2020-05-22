@@ -184,6 +184,7 @@ function createPopSongCallback(resp) {
     var popSongIDs = tracks.items.map( function (x) { return x.track.id } ).join(","); //Join id's for next URL creation
     var length = tracks.items.length;
     var URL = 'https://api.spotify.com/v1/audio-features/?ids=' + popSongIDs;
+    window.popSongs = newArray( length );
 
     var callback = function(response) {
         var features = JSON.parse( response.responseText ).audio_features; //Features is now a list of feature objects
@@ -203,9 +204,8 @@ function createPopSongCallback(resp) {
 function getKeySong() {
 
     //The function used when we get the top user songs
-    userTopSongsCallback = function (response) {
-        //TODO
-        return null;
+    var userTopSongsCallback = function (response) {
+        window.features = JSON.parse( response.responseText );
     }
 
     //TODO
