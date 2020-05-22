@@ -164,14 +164,14 @@ function createSong(obj, name) {
  * This function makes a request to the SPOTIFY API and parses a song object out of that.
  * @param {string} name The name of the song to be gotten from spotify.
  */
-export function song(name) {
+function song(name) {
     //TODO
 };
 
 /**
  * Returns a list of popular songs within spotify. Each song should be in the form of the song object.
  */
-export function popularSongs() {
+function popularSongs() {
     //TODO
 };
 
@@ -182,6 +182,6 @@ export function popularSongs() {
  * or whatever to make this function actually work as intended. This is the big one.
  * @param {??} profile 
  */
-export function getKey(profile) {
+function getKey(profile) {
     //TODO
 }

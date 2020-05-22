@@ -9,8 +9,8 @@
   <!--vvvvv For testing purposes only vvvvvv-->
   <!--<script type="module" src="http://localhost:8888/script.js"></script>
   <script type="module" src="http://localhost:8888/spot.js"></script>-->
-  <script type="module" src="spot.js"></script>
-  <script type="module" src="script.js"></script>
+  <script src="spot.js"></script>
+  <script src="script.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
@@ -24,10 +24,10 @@
   </header>
   <image src="resource/logo.png" alt="Mood Swings" id="logo" width="500"></image>
   <main>
-      <form action="#">
+      <div id="form">
         <input type="text" placeholder="Search.." id="input">
-        <button onclick="formHandler()">SUB</button>
-      </form>
+        <button id="submit" onclick="begin()">SUB</button>
+      </div>
   </main>
 
   <footer id="fun">
