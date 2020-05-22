@@ -1,30 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="h-100">
+
 <head>
-  <meta charset="utf-8">
-  <title>Mood Swings</title>
-  <meta name="author" content="John Cinquegrana, othe rpeople">
-  <meta name="description" content="A website focused on relieving stress under COVID-19 through music">
-  <link href="style.css" rel="stylesheet">
-  <script src="script.js"></script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Login to Mood Swing</title>
 </head>
 
-<body>
-  <header>
-      <p>HealthHack 2 for Funs</p>
-  </header>
-  <image src="resource/logo.png" alt="Mood Swings" id="logo" width="500"></image>
-  <main>
-      <form action="#">
-        <input type="text" placeholder="Search.." id="input">
-        <button onclick="formHandler()">SUB</button>
-      </form>
-  </main>
-
-  <footer id="fun">
-      <p>My name is Johnny and I like websites</p>
-  </footer>
-
+<body class="h-100" style="overflow: hidden">
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col">
+                <h1 class="text-success text-center display-1">Mood Swings</h1>
+                <h5 class="text-dark text-center">Get song recommendations based on mood!</h5>
+                <div class=" mt-4 text-center">
+                    <a class="btn btn-primary text-white" id="login-button">Log in with Spotify</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="login.js"></script>
 </body>
 
 </html>

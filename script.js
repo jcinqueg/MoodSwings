@@ -5,7 +5,6 @@
  * @abstract    Uses the Spotify API to recommend songs based on mood
  */
 
-
  /**
   * This function gets called when the form is submitted.
   */
