@@ -154,7 +154,7 @@ function createSong(obj, name) {
             (this.loudness - other.loudness) ^ 2 +
             (this.valence - other.valence) ^ 2
         );
-    }
+    };
     //Add the name of the song for convenience
     obj.name = name;
 };

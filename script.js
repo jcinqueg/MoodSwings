@@ -5,8 +5,6 @@
  * @abstract    Uses the Spotify API to recommend songs based on mood
  */
 
- import * as Spot from './spot.js';
-
  /**
   * This function gets called when the form is submitted.
   */
