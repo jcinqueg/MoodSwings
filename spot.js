@@ -38,6 +38,7 @@ function getParamsFromURL() {
  * This function verifies the state received and starts the function chain
  */
 window.onload = function() {
+    this.console.log("Checking login information.");
     var auth_success = getParamsFromURL()
     //localStorage.setItem('spotify_auth_state', localStorage.getItem('received_state_1'))
     if (auth_success & localStorage.getItem('received_state') == localStorage.getItem('spotify_auth_state_1')) {
