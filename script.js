@@ -5,6 +5,8 @@
  * @abstract    Uses the Spotify API to recommend songs based on mood
  */
 
+console.log("Loading script.js.");
+
  /**
   * This function gets called when the form is submitted.
   */

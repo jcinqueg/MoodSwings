@@ -5,6 +5,8 @@
  * @abstract    Uses the Spotify API to create song objects from song names
  */
 
+console.log("Loading spot.js");
+
 /**
  * This function is simply for dehashing the auth data in the url
  */
