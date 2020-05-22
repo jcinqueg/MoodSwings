@@ -51,7 +51,7 @@ window.onload = function() {
         //console.log(success, localStorage.getItem('received_state'), localStorage.getItem('spotify_auth_state'))
     }
     //Example function call with callback funtion that prints response to console
-    querySpotifyTopSongs(20, callback)
+    querySpotifyTopSongs(20, createPopSongCallback)
 }
 
 /**
