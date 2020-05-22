@@ -167,6 +167,10 @@ function createSong(obj, name, artist) {
     }
 };
 
+/**
+ * The callback function for the popular song request Spotify call
+ * @param {XMLHttpRequest response} resp 
+ */
 function createPopSongCallback(resp) {
     var tracks = JSON.parse( resp.responseText ); //Get the JSON value of the return
 
@@ -182,28 +186,29 @@ function createPopSongCallback(resp) {
     var URL = 'https://api.spotify.com/v1/audio-features/?ids=' + popSongIDs;
 
     callback = function(response) {
-        window.features = JSON.parse( response.responseText );
+        features = JSON.parse( response.responseText ).audio_features; //Features is now a list of feature objects
+        for( i = 0; i < length; i++) {
+            //For each track create its popSongs object with all the needed information
+            window.popSongs[i] = createSong( features[i], popSongNames[i], popSongArtists[i] );
+        }
     }
 
+    //Get the features of each of the popular songs
     loadRequest(URL, callback);
 }
 
 /**
- * Given the id of a song, this function will return a song object that contains all necessary features of the song.
- * This function makes a request to the SPOTIFY API and parses a song object out of that.
- * @param {string} name The name of the song to be gotten from spotify.
+ * Use user information to get the key song that we should search for.
  */
-function song(name) {
-    //queryTrackFeatures(track_id, callbackFunction)
-    function callback (resp) {
-        JSON.parse( resp.responseText );
-    };
-    //TODO
-};
+function getKeySong() {
 
-/**
- * Returns a list of popular songs within spotify. Each song should be in the form of the song object.
- */
-function popularSongs() {
+    //The function used when we get the top user songs
+    userTopSongsCallback = function (response) {
+        //TODO
+        return null;
+    }
+
     //TODO
-};
+    return null;
+
+}
