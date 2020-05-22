@@ -39,7 +39,6 @@ function getParamsFromURL() {
  */
 window.onload = function() {
     var auth_success = getParamsFromURL()
-    console.log("yes")
     localStorage.setItem('spotify_auth_state', localStorage.getItem('received_state'))
     if (auth_success & localStorage.getItem('received_state') == localStorage.getItem('spotify_auth_state')) {
         $(".content")[0].style.display = "block"
@@ -47,6 +46,79 @@ window.onload = function() {
     } else {
         $(".error")[0].style.display = "block"
         //console.log(success, localStorage.getItem('received_state'), localStorage.getItem('spotify_auth_state'))
+    }
+    querySpotifyTopSongs(20, callback)
+}
+
+/**
+ * Helper function to load GET requests. It requires a callback function since requests are async
+ * Raw data is passed to the callback function, so you must use
+ * JSON.parse([response].responseText) to extract values ([response] = the response)
+ */
+function loadRequest(url, callbackFunction) {
+        var xhttp;
+        var oauth_id = localStorage.getItem('access_token');
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                callbackFunction(this);
+            } else if (this.status == 401) {
+                throw "401: Access token unauthorized"
+                $(".content")[0].style.display = "none"
+                $(".error")[0].style.display = "block"
+            }
+        };
+        xhttp.ontimeout = function(e) {
+            throw "Request timed out: " + url
+        }
+        xhttp.open("GET", url, true);
+        xhttp.setRequestHeader("Authorization", "Bearer " + oauth_id)
+        xhttp.timeout = 10000
+        xhttp.send();
+    }
+
+/**
+ * Gets between 1 and 50 top songs over a six month period for current user.
+ * Specified callback funtion gets passed along to loadRequest()
+ */
+function queryUserTopSongs(limit, callbackFunction) {
+    if (limit > 50 || limit < 1) {
+        throw "Invaild limit value"
+    } else {
+        var params = { "limit": limit };
+        var url = "https://api.spotify.com/v1/me/top/tracks/?" + jQuery.param(params)
+        loadRequest(url, callbackFunction)
+    }
+}
+
+/**
+ * Example callback function for testing purposes
+ */
+function callback(req) {
+    console.log(JSON.parse(req.responseText))
+}
+
+/**
+ * Gets audio features for the specified spotify track id (the returned "id" field in json, must be a string)
+ * Specified callback funtion gets passed along to loadRequest()
+ */
+function queryTrackFeatures(track_id, callbackFunction) {
+    var url = "https://api.spotify.com/v1/audio-features/" + track_id
+    loadRequest(url, callbackFunction)
+}
+
+/**
+ * Gets between 1 and 50 tracks in the playlist "United States Top 50"
+ * Specified callback funtion gets passed along to loadRequest()
+ */
+function querySpotifyTopSongs(limit, callbackFunction) {
+    if (limit > 50 || limit < 1) {
+        throw "Invaild limit value"
+    } else {
+        var playlist_uri = "37i9dQZEVXbLRQDuF5jeBp"
+        var params = { "limit": limit };
+        var url = "https://api.spotify.com/v1/playlists/" + playlist_uri + "/tracks/?" + jQuery.param(params)
+        loadRequest(url, callbackFunction)
     }
 }
 
