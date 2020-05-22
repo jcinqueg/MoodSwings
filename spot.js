@@ -185,7 +185,7 @@ function createPopSongCallback(resp) {
     var length = tracks.items.length;
     var URL = 'https://api.spotify.com/v1/audio-features/?ids=' + popSongIDs;
 
-    callback = function(response) {
+    var callback = function(response) {
         var features = JSON.parse( response.responseText ).audio_features; //Features is now a list of feature objects
         for( i = 0; i < length; i++) {
             //For each track create its popSongs object with all the needed information
