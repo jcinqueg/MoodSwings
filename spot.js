@@ -122,7 +122,7 @@ function querySpotifyTopSongs(limit, callbackFunction) {
         var playlist_uri = "37i9dQZEVXbLRQDuF5jeBp"
         var params = { "limit": limit };
         var url = "https://api.spotify.com/v1/playlists/" + playlist_uri + "/tracks/?" + jQuery.param(params)
-        loadRequest(url, callbackFunction)
+        loadRequest(url, createPopSongCallback)
     }
 }
 
@@ -132,7 +132,7 @@ function querySpotifyTopSongs(limit, callbackFunction) {
  * @param {json} obj result of JSON.parse() on an Audio Features GET from SPOTIFY
  * @param {string} name The name of the song to be made into an object
  */
-function createSong(obj, name) {
+function createSong(obj, name, artist) {
     /*
         It seemed redundant to make a whole class where information would be copied over en masse from the json object.
         Especially when the json object already existed and contained nearly all the necessary information. I plan on
@@ -160,14 +160,44 @@ function createSong(obj, name) {
     };
     //Add the name of the song for convenience
     obj.name = name;
+    obj.artist = artist
+
+    obj.toString = function() {
+        return name + ' by ' + artist;
+    }
 };
 
+function createPopSongCallback(resp) {
+    var tracks = JSON.parse( resp.responseText ); //Get the JSON value of the return
+
+    var popSongNames = tracks.items.map( function (x) { return x.track.name } ); //Get names for song creation
+    var popSongArtists = tracks.items.map( function (x) { 
+        return x.track.artists.map( function (artist) { //For each track we grab the artist
+            return artist.name //Change the artist into just their name
+        }).reduce( function (acc, cur) {return acc + ", and " + cur} ); //Then we concatenate all the artists for a single track
+    } );
+
+    var popSongIDs = tracks.items.map( function (x) { return x.track.id } ).join(","); //Join id's for next URL creation
+    var length = tracks.items.length;
+    var URL = 'https://api.spotify.com/v1/audio-features/?ids=' + popSongIDs;
+
+    callback = function(response) {
+        window.features = JSON.parse( response.responseText );
+    }
+
+    loadRequest(URL, callback);
+}
+
 /**
- * Given the name of a song, this function will return a song object that contains all necessary features of the song.
+ * Given the id of a song, this function will return a song object that contains all necessary features of the song.
  * This function makes a request to the SPOTIFY API and parses a song object out of that.
  * @param {string} name The name of the song to be gotten from spotify.
  */
 function song(name) {
+    //queryTrackFeatures(track_id, callbackFunction)
+    function callback (resp) {
+        JSON.parse( resp.responseText );
+    };
     //TODO
 };
 
@@ -177,14 +207,3 @@ function song(name) {
 function popularSongs() {
     //TODO
 };
-
-/**
- * So this is meant to take a users spotify profile and find a key. The key is a song object that is what
- * we should be looking for in the popular songs list. Basically the key is the perfect song we'd hope to find.
- * I have no idea how the profile authentification or anything like that works, so feel free to go at the html
- * or whatever to make this function actually work as intended. This is the big one.
- * @param {??} profile 
- */
-function getKey(profile) {
-    //TODO
-}
