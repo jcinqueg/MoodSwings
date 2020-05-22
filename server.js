@@ -1,4 +1,4 @@
-//TEMPORARY!! USED FOR LOCAL TESTING ONLY!!!
+//TEMPORARY!! USED FOR LOCAL TESTING ONLY TO AVOID CORS BLOCKING!!!
 var express = require('express');
 var app = express();
 

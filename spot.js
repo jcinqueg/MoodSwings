@@ -39,14 +39,15 @@ function getParamsFromURL() {
  */
 window.onload = function() {
     var auth_success = getParamsFromURL()
-    localStorage.setItem('spotify_auth_state', localStorage.getItem('received_state'))
-    if (auth_success & localStorage.getItem('received_state') == localStorage.getItem('spotify_auth_state')) {
+    //localStorage.setItem('spotify_auth_state', localStorage.getItem('received_state_1'))
+    if (auth_success & localStorage.getItem('received_state') == localStorage.getItem('spotify_auth_state_1')) {
         $(".content")[0].style.display = "block"
         //$("#searchbutton")[0].addEventListener("click", function() { searchForTrack() });
     } else {
         $(".error")[0].style.display = "block"
         //console.log(success, localStorage.getItem('received_state'), localStorage.getItem('spotify_auth_state'))
     }
+    //Example function call with callback funtion that prints response to console
     querySpotifyTopSongs(20, callback)
 }
 

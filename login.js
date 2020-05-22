@@ -12,8 +12,9 @@ function generateRandomString(length) {
 
 document.getElementById('login-button').addEventListener('click', function() {
 
-    var client_id = '911197d2501945e0b7ef24b6ee2b5f1e'; // Your client id
-    var redirect_uri = 'http://localhost:8888/index.html'; // Your redirect uri
+    var client_id = '911197d2501945e0b7ef24b6ee2b5f1e'; // Unique client id for MoodSwings
+    //var redirect_uri = 'http://localhost:8888/index.html'; // Test redirect uri
+    var redirect_uri = 'https://jcinqueg.github.io/MoodSwings/';
 
     var state = generateRandomString(16);
 
