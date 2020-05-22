@@ -3,13 +3,19 @@
 <head>
   <meta charset="utf-8">
   <title>Mood Swings</title>
-  <meta name="author" content="John Cinquegrana, othe rpeople">
+  <meta name="author" content="John Cinquegrana, other people">
   <meta name="description" content="A website focused on relieving stress under COVID-19 through music">
   <link href="style.css" rel="stylesheet">
-  <script type="module" src="script.js"></script>
+  <script type="module" src="http://localhost:8888/script.js"></script>
+  <script type="module" src="http://localhost:8888/spot.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
+  <div class="error" style="display: none">
+    There was an error logging in!
+  </div>
+  <div class="content" style="display: none">
   <header>
       <p>HealthHack 2 for Funs</p>
   </header>
@@ -24,7 +30,7 @@
   <footer id="fun">
       <p>My name is Johnny and I like websites</p>
   </footer>
-
+</div>
 </body>
 
 </html>

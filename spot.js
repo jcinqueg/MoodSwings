@@ -5,6 +5,50 @@
  * @abstract    Uses the Spotify API to create song objects from song names
  */
 
+/**
+ * This function is simply for dehashing the auth data in the url
+ */
+function getHashParams() {
+    var hashParams = {};
+    var e, r = /([^&;=]+)=?([^&;]*)/g,
+        q = window.location.hash.substring(1);
+    while (e = r.exec(q)) {
+        hashParams[e[1]] = decodeURIComponent(e[2]);
+    }
+    return hashParams;
+}
+
+/**
+ * This function sets loaclStorage items for the access token (vaild for 60 min) and the state
+ * for verification
+ */
+function getParamsFromURL() {
+    try {
+        var hashParams = getHashParams()
+        localStorage.setItem('access_token', hashParams["access_token"]);
+        localStorage.setItem('received_state', hashParams["state"]);
+        return true;
+    } catch (err) {
+        console.log(err.message)
+        return false;
+    }
+}
+
+/**
+ * This function verifies the state received and starts the function chain
+ */
+window.onload = function() {
+    var auth_success = getParamsFromURL()
+    console.log("yes")
+    localStorage.setItem('spotify_auth_state', localStorage.getItem('received_state'))
+    if (auth_success & localStorage.getItem('received_state') == localStorage.getItem('spotify_auth_state')) {
+        $(".content")[0].style.display = "block"
+        //$("#searchbutton")[0].addEventListener("click", function() { searchForTrack() });
+    } else {
+        $(".error")[0].style.display = "block"
+        //console.log(success, localStorage.getItem('received_state'), localStorage.getItem('spotify_auth_state'))
+    }
+}
 
 /**
  * Takes in the result of the song GET from the spotify API, removes unnecessary fields, and adds necessary methods.
@@ -27,20 +71,20 @@ function createSong(obj, name) {
      * Returns the basic Euclidean distance between two song objects.
      * JDoc will not show up because I made the object the lazy way.
      */
-    obj.Distance = function (other) {
+    obj.Distance = function(other) {
         return Math.sqrt(
-            (this.acousticness - other.acousticness)^2 +
-            (this.danceability - other.danceability)^2 +
-            (this.energy - other.energy)^2 +
-            (this.instrumentalness - other.instrumentalness)^2 +
-            (this.liveness - other.liveness)^2 +
-            (this.loudness - other.loudness)^2 +
-            (this.valence - other.valence)^2
+            (this.acousticness - other.acousticness) ^ 2 +
+            (this.danceability - other.danceability) ^ 2 +
+            (this.energy - other.energy) ^ 2 +
+            (this.instrumentalness - other.instrumentalness) ^ 2 +
+            (this.liveness - other.liveness) ^ 2 +
+            (this.loudness - other.loudness) ^ 2 +
+            (this.valence - other.valence) ^ 2
         );
     }
     //Add the name of the song for convenience
     obj.name = name;
-}
+};
 
 /**
  * Given the name of a song, this function will return a song object that contains all necessary features of the song.
@@ -49,14 +93,14 @@ function createSong(obj, name) {
  */
 export function song(name) {
     //TODO
-}
+};
 
 /**
  * Returns a list of popular songs within spotify. Each song should be in the form of the song object.
  */
 export function popularSongs() {
     //TODO
-}
+};
 
 /**
  * So this is meant to take a users spotify profile and find a key. The key is a song object that is what
