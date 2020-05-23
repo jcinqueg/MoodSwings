@@ -247,6 +247,8 @@ function getKeySong() {
             key.liveness        /= length;
             key.loudness        /= length;
             key.valence         /= length;
+
+            window.keySong = createSong( key, "NONE", "NONE");
         }
 
         //Load all the feature information into the key object
@@ -257,5 +259,5 @@ function getKeySong() {
     queryUserTopSongs(20, userTopSongsCallback );
 
     //Return the properly created key object
-    window.keySong = createSong( key, "NONE", "NONE");
+    
 }
