@@ -218,7 +218,8 @@ function getKeySong() {
     
     //The function used when we get the top user songs
     var userTopSongsCallback = function (response) {
-        var tracks = JSON.parse( response.responseText ).items; //tracks is the list of songs
+        var features = JSON.parse( response.responseText );
+        var tracks = features.items; //tracks is the list of songs
         length = tracks.length;
         idList = tracks.map( function (x) {x.id} ).join(",");
 
