@@ -201,6 +201,8 @@ function createPopSongCallback(resp) {
 
     //Get the features of each of the popular songs
     loadRequest(URL, callback);
+
+    console.log( "popSongs global array of popular songs has been generated" );
 }
 
 /**
@@ -208,7 +210,7 @@ function createPopSongCallback(resp) {
  */
 function getKeySong() {
 
-    var idList = "";
+    var idList;
     var length;
     
     //The function used when we get the top user songs
@@ -245,6 +247,9 @@ function getKeySong() {
         key.valence         /= length;
     }
 
-    return createSong( key, "NONE", "NONE");
+    //Load all the feature information into the key object
+    loadRequest(URL, featureCallback);
 
+    //Return the properly created key object
+    return createSong( key, "NONE", "NONE");
 }
