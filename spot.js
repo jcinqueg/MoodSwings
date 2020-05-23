@@ -122,7 +122,7 @@ function querySpotifyTopSongs(limit, callbackFunction) {
         var playlist_uri = "37i9dQZEVXbLRQDuF5jeBp"
         var params = { "limit": limit };
         var url = "https://api.spotify.com/v1/playlists/" + playlist_uri + "/tracks/?" + jQuery.param(params)
-        loadRequest(url, createPopSongCallback)
+        loadRequest(url, callbackFunction)
     }
 }
 
@@ -197,6 +197,7 @@ function createPopSongCallback(resp) {
             //For each track create its popSongs object with all the needed information
             window.popSongs[i] = createSong( features[i], popSongNames[i], popSongArtists[i] );
         }
+        getKeySong();
     }
 
     //Get the features of each of the popular songs
@@ -218,43 +219,43 @@ function getKeySong() {
         var tracks = JSON.parse( response.responseText ).items; //tracks is the list of songs
         length = tracks.length;
         idList = tracks.map( function (x) {x.id} ).join(",");
+
+        if( length < 1 ) {
+            console.log( "Warning: No songs to get information from." );
+            return;
+        }
+
+        var URL = 'https://api.spotify.com/v1/audio-features/?ids=' + idList;
+        var key = new Object();
+
+        var featureCallback = function (response) {
+            var features = JSON.parse( response.responseText ).audio_features; //Features is now a list of feature objects
+            for( var feat in features ) {
+                //For each set of features
+                key.acousticness    += feat.acousticness;
+                key.danceability    += feat.danceability;
+                key.energy          += feat.energy;
+                key.instrumentalness    += feat.instrumentalness;
+                key.liveness    += feat.liveness;
+                key.loudness    += feat.loudness;
+                key.valence     += feat.valence;
+            }
+            key.acousticness    /= length;
+            key.danceability    /= length;
+            key.energy          /= length;
+            key.instrumentalness    /= length;
+            key.liveness        /= length;
+            key.loudness        /= length;
+            key.valence         /= length;
+        }
+
+        //Load all the feature information into the key object
+        loadRequest(URL, featureCallback, async=false);
     }
 
     //Get the users top songs
     queryUserTopSongs(20, userTopSongsCallback, async=false);
 
-    if( length < 1 ) {
-        console.log( "Warning: No songs to get information from." );
-        return;
-    }
-
-    var URL = 'https://api.spotify.com/v1/audio-features/?ids=' + idList;
-    var key = new Object();
-
-    var featureCallback = function (response) {
-        var features = JSON.parse( response.responseText ).audio_features; //Features is now a list of feature objects
-        for( var feat in features ) {
-            //For each set of features
-            key.acousticness    += feat.acousticness;
-            key.danceability    += feat.danceability;
-            key.energy          += feat.energy;
-            key.instrumentalness    += feat.instrumentalness;
-            key.liveness    += feat.liveness;
-            key.loudness    += feat.loudness;
-            key.valence     += feat.valence;
-        }
-        key.acousticness    /= length;
-        key.danceability    /= length;
-        key.energy          /= length;
-        key.instrumentalness    /= length;
-        key.liveness        /= length;
-        key.loudness        /= length;
-        key.valence         /= length;
-    }
-
-    //Load all the feature information into the key object
-    loadRequest(URL, featureCallback, async=false);
-
     //Return the properly created key object
-    return createSong( key, "NONE", "NONE");
+    window.keySong = createSong( key, "NONE", "NONE");
 }
