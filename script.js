@@ -13,6 +13,7 @@ console.log("Loading script.js.");
 function reccomend() {
     console.log( "Attempting to recommend song" );
     var song = getRecommendation();
+    console.log( "Resulting song is: " + song.toString() );
     document.getElementById("output").innerHTML = song.toString();
 }
 
