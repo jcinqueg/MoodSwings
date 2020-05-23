@@ -221,7 +221,7 @@ function getKeySong() {
         var features = JSON.parse( response.responseText );
         var tracks = features.items; //tracks is the list of songs
         length = tracks.length;
-        idList = tracks.map( function (x) {x.id} ).join(",");
+        idList = tracks.map( function (x) {return x.id} ).join(",");
 
         if( length < 1 ) {
             console.log( "Warning: No songs to get information from." );
