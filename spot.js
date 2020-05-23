@@ -127,6 +127,23 @@ function querySpotifyTopSongs(limit, callbackFunction) {
 }
 
 /**
+ * Compares two song objects to other and returns their Euclidean Distance.
+ * @param {song} obj 
+ * @param {song} other 
+ */
+function songDistance(obj, other) {
+    return Math.sqrt(
+        (this.acousticness - other.acousticness) ^ 2 +
+        (this.danceability - other.danceability) ^ 2 +
+        (this.energy - other.energy) ^ 2 +
+        (this.instrumentalness - other.instrumentalness) ^ 2 +
+        (this.liveness - other.liveness) ^ 2 +
+        (this.loudness - other.loudness) ^ 2 +
+        (this.valence - other.valence) ^ 2
+    );
+}
+
+/**
  * Takes in the result of the song GET from the spotify API, removes unnecessary fields, and adds necessary methods.
  * You must call JSON.parse on the result of the GET before passing it into this method.
  * @param {json} obj result of JSON.parse() on an Audio Features GET from SPOTIFY
@@ -143,21 +160,7 @@ function createSong(obj, name, artist) {
     delete obj.time_signature;
     delete obj.tempo;
     delete obj.type;
-    /**
-     * Returns the basic Euclidean distance between two song objects.
-     * JDoc will not show up because I made the object the lazy way.
-     */
-    obj.Distance = function(other) {
-        return Math.sqrt(
-            (this.acousticness - other.acousticness) ^ 2 +
-            (this.danceability - other.danceability) ^ 2 +
-            (this.energy - other.energy) ^ 2 +
-            (this.instrumentalness - other.instrumentalness) ^ 2 +
-            (this.liveness - other.liveness) ^ 2 +
-            (this.loudness - other.loudness) ^ 2 +
-            (this.valence - other.valence) ^ 2
-        );
-    };
+
     //Add the name of the song for convenience
     obj.name = name;
     obj.artist = artist
