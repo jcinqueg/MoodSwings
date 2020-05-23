@@ -24,11 +24,12 @@ function reccomend() {
  */
 function getRecommendation() {
   //window.popSongs holds all of the popular songs
-  var keySong = getKeySong();
+  var keySong = window.keySong;
   var minstance = 10;
   var targetSong = new Object();
   targetSong.toString = function () { return "Sorry, you're tastes are inconceivable. We have no song for you." };
-  for( song in window.popSongs ) {
+  for( i = 0; i < topSongs; i++) {
+    var song = window.popSongs[i];
     //For each song, check it's distance and update variables as necessary
     var distance = songDistance( keySong, song );
     if( distance < minstance ) {

@@ -188,7 +188,7 @@ function createPopSongCallback(resp) {
         }).reduce( function (acc, cur) {return acc + ", and " + cur} ); //Then we concatenate all the artists for a single track
     } );
 
-    var popSongIDs = tracks.items.map( function (x) { return x.track.id } ).join(","); //Join id's for next URL creation
+    popSongIDs = tracks.items.map( function (x) { return x.track.id } ).join(","); //Join id's for next URL creation
     var length = tracks.items.length;
     var URL = 'https://api.spotify.com/v1/audio-features/?ids=' + popSongIDs;
     window.popSongs = new Array( length );
@@ -222,18 +222,29 @@ function getKeySong() {
         var tracks = features.items; //tracks is the list of songs
         length = tracks.length;
         idList = tracks.map( function (x) {return x.id} ).join(",");
+        //List of ids seperated by a comma
 
-        if( length < 1 ) {
+        if( length < 1 ) { 
+            //If the user hasn't listened to any songs yet, we return and warn.
             console.log( "Warning: No songs to get information from." );
             return;
         }
 
         var URL = 'https://api.spotify.com/v1/audio-features/?ids=' + idList;
+        //Give the key a generic object appearance :3
         var key = new Object();
+        key.acousticness    = 0;
+        key.danceability    = 0;
+        key.energy          = 0;
+        key.instrumentalness    = 0;
+        key.liveness    = 0;
+        key.loudness    = 0;
+        key.valence     = 0;
 
         var featureCallback = function (response) {
             var features = JSON.parse( response.responseText ).audio_features; //Features is now a list of feature objects
-            for( var feat in features ) {
+            for( i = 0; i < length; i++) {
+                feat = features[i];
                 //For each set of features
                 key.acousticness    += feat.acousticness;
                 key.danceability    += feat.danceability;
