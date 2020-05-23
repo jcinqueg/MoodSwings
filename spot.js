@@ -6,6 +6,8 @@
  */
 
 console.log("Loading spot.js");
+var topSongs = 20;
+var userSongs = 20;
 
 /**
  * This function is simply for dehashing the auth data in the url
@@ -51,7 +53,7 @@ window.onload = function() {
         //console.log(success, localStorage.getItem('received_state'), localStorage.getItem('spotify_auth_state'))
     }
     //Populates the top songs into a global variable
-    querySpotifyTopSongs(20, createPopSongCallback)
+    querySpotifyTopSongs(topSongs, createPopSongCallback)
 }
 
 /**
@@ -83,7 +85,7 @@ function loadRequest(url, callbackFunction ) {
 
 /**
  * Gets between 1 and 50 top songs over a six month period for current user.
- * Specified callback funtion gets passed along to loadRequest()
+ * Specified callback function gets passed along to loadRequest()
  */
 function queryUserTopSongs(limit, callbackFunction) {
     if (limit > 50 || limit < 1) {
@@ -256,8 +258,6 @@ function getKeySong() {
     }
 
     //Get the users top songs
-    queryUserTopSongs(20, userTopSongsCallback );
-
-    //Return the properly created key object
+    queryUserTopSongs(userSongs, userTopSongsCallback );
     
 }
