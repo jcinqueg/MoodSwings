@@ -210,6 +210,7 @@ function getKeySong() {
 
     var idList = "";
     var length;
+    
     //The function used when we get the top user songs
     var userTopSongsCallback = function (response) {
         var tracks = JSON.parse( response.responseText ).items; //tracks is the list of songs
@@ -220,14 +221,30 @@ function getKeySong() {
     //Get the users top songs
     queryUserTopSongs(20, userTopSongsCallback);
 
+    var URL = 'https://api.spotify.com/v1/audio-features/?ids=' + idList;
     var key = new Object();
 
     var featureCallback = function (response) {
         var features = JSON.parse( response.responseText ).audio_features; //Features is now a list of feature objects
-
+        for( var feat in features ) {
+            //For each set of features
+            key.acousticness    += feat.acousticness;
+            key.danceability    += feat.danceability;
+            key.energy          += feat.energy;
+            key.instrumentalness    += feat.instrumentalness;
+            key.liveness    += feat.liveness;
+            key.loudness    += feat.loudness;
+            key.valence     += feat.valence;
+        }
+        key.acousticness    /= length;
+        key.danceability    /= length;
+        key.energy          /= length;
+        key.instrumentalness    /= length;
+        key.liveness        /= length;
+        key.loudness        /= length;
+        key.valence         /= length;
     }
 
-    //TODO
-    return null;
+    return createSong( key, "NONE", "NONE");
 
 }
