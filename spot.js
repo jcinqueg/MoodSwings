@@ -59,7 +59,7 @@ window.onload = function() {
  * Raw data is passed to the callback function, so you must use
  * JSON.parse([response].responseText) to extract values ([response] = the response)
  */
-function loadRequest(url, callbackFunction, async=true) {
+function loadRequest(url, callbackFunction ) {
         var xhttp;
         var oauth_id = localStorage.getItem('access_token');
         xhttp = new XMLHttpRequest();
@@ -75,7 +75,7 @@ function loadRequest(url, callbackFunction, async=true) {
         xhttp.ontimeout = function(e) {
             throw "Request timed out: " + url
         }
-        xhttp.open("GET", url, async);
+        xhttp.open("GET", url, true);
         xhttp.setRequestHeader("Authorization", "Bearer " + oauth_id)
         xhttp.timeout = 10000
         xhttp.send();
@@ -250,11 +250,11 @@ function getKeySong() {
         }
 
         //Load all the feature information into the key object
-        loadRequest(URL, featureCallback, async=false);
+        loadRequest(URL, featureCallback );
     }
 
     //Get the users top songs
-    queryUserTopSongs(20, userTopSongsCallback, async=false);
+    queryUserTopSongs(20, userTopSongsCallback );
 
     //Return the properly created key object
     window.keySong = createSong( key, "NONE", "NONE");
