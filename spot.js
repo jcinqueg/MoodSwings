@@ -207,16 +207,20 @@ function getKeySong() {
     var length;
     //The function used when we get the top user songs
     var userTopSongsCallback = function (response) {
-        tracks = JSON.parse( response.responseText ).items; //tracks is the list of songs
-
-        //idList = features.
+        var tracks = JSON.parse( response.responseText ).items; //tracks is the list of songs
+        length = tracks.length;
+        idList = tracks.map( function (x) {x.id} ).join(",");
     }
 
     //Get the users top songs
     queryUserTopSongs(20, userTopSongsCallback);
 
-    
     var key = new Object();
+
+    var featureCallback = function (response) {
+        var features = JSON.parse( response.responseText ).audio_features; //Features is now a list of feature objects
+
+    }
 
     //TODO
     return null;
