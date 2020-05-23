@@ -165,6 +165,8 @@ function createSong(obj, name, artist) {
     obj.toString = function() {
         return name + ' by ' + artist;
     }
+
+    return obj;
 };
 
 /**
