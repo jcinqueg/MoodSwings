@@ -203,12 +203,20 @@ function createPopSongCallback(resp) {
  */
 function getKeySong() {
 
-    var idList;
+    var idList = "";
+    var length;
     //The function used when we get the top user songs
     var userTopSongsCallback = function (response) {
-        features = JSON.parse( response.responseText );
+        tracks = JSON.parse( response.responseText ).items; //tracks is the list of songs
+
         //idList = features.
     }
+
+    //Get the users top songs
+    queryUserTopSongs(20, userTopSongsCallback);
+
+    
+    var key = new Object();
 
     //TODO
     return null;
