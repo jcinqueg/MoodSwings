@@ -11,7 +11,7 @@ console.log("Loading script.js.");
   * This function gets called when the form is submitted.
   */
 function reccomend() {
-    console.log( "Input read: " + input );
+    console.log( "Attempting to recommend song" );
     var song = getRecommendation();
     Document.getElementById("output").innerHTML = song.toString();
 }
