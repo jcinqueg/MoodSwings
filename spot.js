@@ -223,6 +223,11 @@ function getKeySong() {
     //Get the users top songs
     queryUserTopSongs(20, userTopSongsCallback);
 
+    if( length < 1 ) {
+        console.log( "Warning: No songs to get information from." );
+        return;
+    }
+
     var URL = 'https://api.spotify.com/v1/audio-features/?ids=' + idList;
     var key = new Object();
 
