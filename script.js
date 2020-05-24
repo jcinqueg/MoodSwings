@@ -10,11 +10,12 @@ console.log("Loading script.js.");
  /**
   * This function gets called when the form is submitted.
   */
-function reccomend() {
+function recommend() {
     console.log( "Attempting to recommend song" );
     var song = getRecommendation();
     console.log( "Resulting song is: " + song.toString() );
     document.getElementById("output").innerHTML = song.toString();
+    document.getElementById("recommendation").style.display = "block"
 }
 
 /**
