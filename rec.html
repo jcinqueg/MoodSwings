@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>Mood Swings</title>
-  <meta name="author" content="John Cinquegrana, other people">
-  <meta name="description" content="A website focused on relieving stress under COVID-19 through music">
-  <link href="style.css" rel="stylesheet">
-  <!--vvvvv For testing purposes only vvvvvv-->
-  <!--<script type="module" src="http://localhost:8888/script.js"></script>
+    <meta charset="utf-8">
+    <title>Mood Swings</title>
+    <meta name="author" content="John Cinquegrana, other people">
+    <meta name="description" content="A website focused on relieving stress under COVID-19 through music">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--<link href="style.css" rel="stylesheet">-->
+    <!--vvvvv For testing purposes only vvvvvv-->
+    <!--<script type="module" src="http://localhost:8888/script.js"></script>
   <script type="module" src="http://localhost:8888/spot.js"></script>-->
-  <script src="spot.js"></script>
-  <script src="script.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="spot.js"></script>
+    <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
-<body>
-  <div class="error" style="display: none">
-    There was an error logging in!
-  </div>
-  <div class="content" style="display: none">
-  <header>
-      <p>HealthHack 2 for Funs</p>
-  </header>
-  <image src="resource/logo.png" alt="Mood Swings" id="logo" width="500"></image>
-  <main>
-      <div id="form">
-        <button id="submit" onclick="reccomend()">SUB</button>
-      </div>
-  </main>
-  <article>
-    <p id="output">You're lookin pretty good out there.</p>
-  </article>
-
-  <footer id="fun">
-      <p>My name is Johnny and I like websites</p>
-  </footer>
-</div>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-sm sticky-top navbar-light d-flex justify-content-between" style="background-color: #e3e3e3;">
+        <a class="navbar-brand" href="index.html">Mood Swings</a>
+        <span class="navbar-text" id="name"></span>
+    </nav>
+    <div class="container mt-3" id="error" style="display: none;">
+        <div class="text-center">
+            <h4>There was an error logging in.</h4>
+        </div>
+        <div class="text-center mt-3">
+            <a class="btn btn-primary" href="index.html">Back to login page</a>
+        </div>
+    </div>
+    <div id="content" style="display: none">
+        <div class="col text-center">
+            <!--<image src="resource/logo.png" alt="Mood Swings" id="logo" width="500"></image>
+            <h1 class="text-success display-1">Mood Swings</h1>-->
+            <h3 class="mt-3">Click below to get a happy song recommended to you!</h3>
+            <h6>(Based on your listening history over the past 6 months on Spotify)</h6>
+            <div class="mt-4" id="form">
+                <button class="btn-lg btn-success" id="submit" onclick="recommend()">Swing my mood!</button>
+            </div>
+            <div id="recommendation" class="mt-5" style="display: none">
+                <h5>Your recommendation is...</h5>
+                <h1 class="mt-1 display-5" id="output">ULT by Denzel Curry</h1>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -13,8 +13,8 @@ function generateRandomString(length) {
 document.getElementById('login-button').addEventListener('click', function() {
 
     var client_id = '911197d2501945e0b7ef24b6ee2b5f1e'; // Unique client id for MoodSwings
-    var redirect_uri = 'http://localhost:8888/rec.html'; // Test redirect uri
-    //var redirect_uri = 'https://jcinqueg.github.io/MoodSwings/rec';
+    //var redirect_uri = 'http://localhost:8888/rec.html'; // Test redirect uri
+    var redirect_uri = 'https://jcinqueg.github.io/MoodSwings/rec';
 
     var state = generateRandomString(16);
 
@@ -27,6 +27,7 @@ document.getElementById('login-button').addEventListener('click', function() {
     url += '&scope=' + encodeURIComponent(scope);
     url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
     url += '&state=' + encodeURIComponent(state);
+    url += '&show_dialog=' + false;
 
     window.location = url;
 }, false);
