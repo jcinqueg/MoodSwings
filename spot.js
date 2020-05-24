@@ -267,5 +267,18 @@ function getKeySong() {
 
     //Get the users top songs
     queryUserTopSongs(userSongs, userTopSongsCallback );
-    
+}
+
+function showTrackAlbum( songID ) {
+    var albumCallback = function (response) {
+        track = JSON.parse( response.responseText );
+        var imageRef = track.album.images[0].url;
+        if( typeof imageRef != 'undefined' ) {
+            document.getElementById("album").src = imageRef;
+        }
+        else console.log( "Album art unreachable" );
+    }
+
+    URL = "https://api.spotify.com/v1/tracks/" + songID;
+    loadRequest(URL, albumCallback );
 }

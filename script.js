@@ -12,10 +12,11 @@ console.log("Loading script.js.");
   */
 function recommend() {
     console.log( "Attempting to recommend song" );
-    var song = getRecommendation();
-    console.log( "Resulting song is: " + song.toString() );
-    document.getElementById("output").innerHTML = song.toString();
+    recSong = getRecommendation();
+    console.log( "Resulting song is: " + recSong.toString() );
+    document.getElementById("output").innerHTML = recSong.toString();
     document.getElementById("recommendation").style.display = "block"
+    showTrackAlbum( recSong.id );
 }
 
 /**
