@@ -6,7 +6,7 @@
  */
 
 console.log("Loading spot.js");
-var topSongs = 20;
+var topSongs = 50;
 var userSongs = 20;
 
 /**
