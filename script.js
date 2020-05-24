@@ -30,14 +30,26 @@ function getRecommendation() {
   var minstance = 10;
   var targetSong = new Object();
   targetSong.toString = function () { return "Sorry, you're tastes are inconceivable. We have no song for you." };
-  for( i = 0; i < topSongs; i++) {
-    var song = window.popSongs[i];
-    //For each song, check it's distance and update variables as necessary
-    var distance = songDistance( keySong, song );
-    if( distance < minstance ) {
-      minstance = distance;
-      targetSong = song;
-    }
+  popDistances = Array( popSongs.length );
+  for( i = 0; i < popDistances.length; i++) {
+    popDistances[i] = { distance: songDistance( keySong, popSongs[i] ), index: i};
   }
-  return targetSong;
+  popDistances.sort( function (song, other) {
+    return song.distance - other.distance;
+  });
+  //popDistances holds all songs in order of recommendation, along with the proper index on the popSongs array
+  curPopDistIndex = 0;
+  
+  //Change button to a 'get next song button'
+  document.getElementById("submit").innerHTML = "Swing some More";
+  document.getElementById("submit").setAttribute( "onClick", "nextRecommend()");
+  return popSongs[ popDistances[curPopDistIndex].index ];
+}
+
+function nextRecommend() {
+  curPopDistIndex += 1;
+  var recSong = popSongs[ popDistances[curPopDistIndex].index ];
+  console.log( "Next song is: " + recSong.toString() );
+  document.getElementById("output").innerHTML = recSong.toString();
+  showTrackAlbum( recSong.id );
 }

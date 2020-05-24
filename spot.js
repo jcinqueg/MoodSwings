@@ -250,6 +250,8 @@ function getKeySong() {
                 key.loudness    += feat.loudness;
                 key.valence     += feat.valence;
             }
+            key.valence *= 1.1;
+
             key.acousticness    /= length;
             key.danceability    /= length;
             key.energy          /= length;
