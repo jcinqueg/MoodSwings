@@ -46,13 +46,14 @@ window.onload = function() {
     var auth_success = getParamsFromURL()
     //localStorage.setItem('spotify_auth_state', localStorage.getItem('received_state_1'))
     if (auth_success & localStorage.getItem('received_state') == localStorage.getItem('spotify_auth_state_1')) {
-        $(".content")[0].style.display = "block"
+        $("#content")[0].style.display = "block"
         //$("#searchbutton")[0].addEventListener("click", function() { searchForTrack() });
     } else {
-        $(".error")[0].style.display = "block"
+        $("#error")[0].style.display = "block"
         //console.log(success, localStorage.getItem('received_state'), localStorage.getItem('spotify_auth_state'))
     }
     //Populates the top songs into a global variable
+    queryUserName(fillUserName)
     querySpotifyTopSongs(topSongs, createPopSongCallback)
 }
 
@@ -70,8 +71,8 @@ function loadRequest(url, callbackFunction ) {
                 callbackFunction(this);
             } else if (this.status == 401) {
                 throw "401: Access token unauthorized"
-                $(".content")[0].style.display = "none"
-                $(".error")[0].style.display = "block"
+                $("#content")[0].style.display = "none"
+                $("#error")[0].style.display = "block"
             }
         };
         xhttp.ontimeout = function(e) {
@@ -98,22 +99,6 @@ function queryUserTopSongs(limit, callbackFunction) {
 }
 
 /**
- * Example callback function for testing purposes
- */
-function callback(req) {
-    console.log(JSON.parse(req.responseText))
-}
-
-/**
- * Gets audio features for the specified spotify track id (the returned "id" field in json, must be a string)
- * Specified callback funtion gets passed along to loadRequest()
- */
-function queryTrackFeatures(track_id, callbackFunction) {
-    var url = "https://api.spotify.com/v1/audio-features/" + track_id
-    loadRequest(url, callbackFunction)
-}
-
-/**
  * Gets between 1 and 50 tracks in the playlist "United States Top 50"
  * Specified callback funtion gets passed along to loadRequest()
  */
@@ -126,6 +111,17 @@ function querySpotifyTopSongs(limit, callbackFunction) {
         var url = "https://api.spotify.com/v1/playlists/" + playlist_uri + "/tracks/?" + jQuery.param(params)
         loadRequest(url, callbackFunction)
     }
+}
+
+function queryUserName(callbackFunction) {
+    var url = "https://api.spotify.com/v1/me"
+    loadRequest(url, callbackFunction)
+}
+
+function fillUserName(req) {
+    var name = JSON.parse(req.responseText).display_name;
+    console.log("Logged in as: " + name);
+    document.getElementById("name").innerHTML = name
 }
 
 /**
