@@ -131,13 +131,13 @@ function fillUserName(req) {
  */
 function songDistance(obj, other) {
     return Math.sqrt(
-        (obj.acousticness - other.acousticness) ^ 2 +
-        (obj.danceability - other.danceability) ^ 2 +
-        (obj.energy - other.energy) ^ 2 +
-        (obj.instrumentalness - other.instrumentalness) ^ 2 +
-        (obj.liveness - other.liveness) ^ 2 +
-        (obj.loudness - other.loudness) ^ 2 +
-        (obj.valence - other.valence) ^ 2
+        Math.pow(obj.acousticness - other.acousticness, 2) +
+        Math.pow(obj.danceability - other.danceability, 2) +
+        Math.pow(obj.energy - other.energy, 2) +
+        Math.pow(obj.instrumentalness - other.instrumentalness, 2) +
+        Math.pow(obj.liveness - other.liveness, 2) +
+        Math.pow(obj.loudness - other.loudness, 2) +
+        Math.pow(obj.valence - other.valence, 2)
     );
 }
 
