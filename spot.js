@@ -135,13 +135,13 @@ function querySpotifyTopSongs(limit, callbackFunction) {
  */
 function songDistance(obj, other) {
     return Math.sqrt(
-        (this.acousticness - other.acousticness) ^ 2 +
-        (this.danceability - other.danceability) ^ 2 +
-        (this.energy - other.energy) ^ 2 +
-        (this.instrumentalness - other.instrumentalness) ^ 2 +
-        (this.liveness - other.liveness) ^ 2 +
-        (this.loudness - other.loudness) ^ 2 +
-        (this.valence - other.valence) ^ 2
+        (obj.acousticness - other.acousticness) ^ 2 +
+        (obj.danceability - other.danceability) ^ 2 +
+        (obj.energy - other.energy) ^ 2 +
+        (obj.instrumentalness - other.instrumentalness) ^ 2 +
+        (obj.liveness - other.liveness) ^ 2 +
+        (obj.loudness - other.loudness) ^ 2 +
+        (obj.valence - other.valence) ^ 2
     );
 }
 
@@ -244,7 +244,7 @@ function getKeySong() {
         var featureCallback = function (response) {
             var features = JSON.parse( response.responseText ).audio_features; //Features is now a list of feature objects
             for( i = 0; i < length; i++) {
-                feat = features[i];
+                var feat = features[i];
                 //For each set of features
                 key.acousticness    += feat.acousticness;
                 key.danceability    += feat.danceability;
